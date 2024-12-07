@@ -13,6 +13,9 @@ export default {
       backgroundImage: {
         'banner': "url('/banner2.jpg')",
       },
+      colors: {
+        gold: "#FFD700"
+      }
     },
   },
   plugins: [],

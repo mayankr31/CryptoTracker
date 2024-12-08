@@ -2,6 +2,9 @@
 # Crypto Tracker
 Crypto Tracker is a comprehensive web application designed to keep users informed about the dynamic cryptocurrency market. The platform features a detailed list of cryptocurrencies, providing real-time information on their prices, market capitalization, and 24-hour percentage changes.
 
+## Demo
+Working live demo: https://crypto-tracker-five-zeta.vercel.app/
+
 ## Getting Started
 Follow these instructions to set up the project locally.
 
@@ -23,6 +26,8 @@ Ensure you have the following installed on your system:
     
     **Material-UI (MUI)**: Used for styling and designing the application's interface with pre-built, customizable components.
 
+    **Tailwind CSS**: Used for adding CSS styles, creating responsive designs with utility-first classes for fast and efficient styling.
+
     **React Router DOM**: Used for navigation between pages.
 
     **Context API**: Used for state management, to share data across components without passing props manually at every level.
@@ -36,11 +41,10 @@ Ensure you have the following installed on your system:
     **React-Chartjs-2**: Used to display historical data chart for individual cryptocurrency.
 
      ```
-     npm i @mui/material @emotion/react @emotion/styled react-router-dom axios 
-    html-react-parser react-alice-carousel react-chartjs-2 chart.js
+     npm i @mui/material @emotion/react @emotion/styled react-router-dom axios html-react-parser react-alice-carousel react-chartjs-2 chart.js
     ```
 
-3. **Start development server**
+4. **Start development server**
 
        npm run dev
 

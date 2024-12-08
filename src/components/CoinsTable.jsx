@@ -18,10 +18,7 @@ import {
   Pagination,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+import { numberWithCommas } from "../config/data";
 
 export function CoinsTable(props) {
   const [coins, setCoins] = useState([]);
@@ -59,8 +56,6 @@ export function CoinsTable(props) {
     setLoading(false);
   };
 
-  console.log(coins);
-
   useEffect(() => {
     fetchCoins();
   }, [currency]);
@@ -80,6 +75,7 @@ export function CoinsTable(props) {
           Cryptocurrency Prices by Market Cap
         </Typography>
 
+        {/* Search field */}
         <TextField
           label="Search For a Crypto Currency"
           variant="outlined"
@@ -87,6 +83,7 @@ export function CoinsTable(props) {
           onChange={(e) => setSearch(e.target.value)}
         />
 
+        {/* Table to show data */}
         <TableContainer>
           {loading ? (
             <LinearProgress className="!bg-[#FFD700]" />
@@ -98,7 +95,7 @@ export function CoinsTable(props) {
                     <TableCell
                       className="!text-black !font-bold !font-montseratt"
                       key={head}
-                      align={head === "Coin" ? "" : "right"}
+                      align={head === "Coin" ? "inherit" : "right"}
                     >
                       {head}
                     </TableCell>
@@ -106,6 +103,7 @@ export function CoinsTable(props) {
                 </TableRow>
               </TableHead>
 
+              {/* Table data from api */}
               <TableBody>
                 {handleSearch()
                   .slice((page - 1) * 10, (page - 1) * 10 + 10)
@@ -118,6 +116,7 @@ export function CoinsTable(props) {
                         key={row.name}
                         className="!bg-[#16171a] !cursor-pointer hover:!bg-[#131111] !font-montseratt"
                       >
+                        {/* Coin symbol and name */}
                         <TableCell
                           component="th"
                           scope="row"
@@ -128,10 +127,7 @@ export function CoinsTable(props) {
                             alt={row.name}
                             className="h-[50px] mb-[10px]"
                           />
-                          <div
-                            style={{ display: "flex", flexDirection: "column" }}
-                            className="flex flex-col"
-                          >
+                          <div className="flex flex-col">
                             <span className="text-[22px] uppercase">
                               {row.symbol}
                             </span>
@@ -139,11 +135,13 @@ export function CoinsTable(props) {
                           </div>
                         </TableCell>
 
+                        {/* Coin Price */}
                         <TableCell align="right">
                           {symbol}{" "}
                           {numberWithCommas(row.current_price.toFixed(2))}
                         </TableCell>
 
+                        {/* Percentage change */}
                         <TableCell
                           align="right"
                           className={`${
@@ -156,6 +154,7 @@ export function CoinsTable(props) {
                           {row.price_change_percentage_24h.toFixed(2)}%
                         </TableCell>
 
+                        {/* Market cap */}
                         <TableCell align="right">
                           {symbol}{" "}
                           {numberWithCommas(
@@ -170,8 +169,10 @@ export function CoinsTable(props) {
             </Table>
           )}
         </TableContainer>
+
+        {/* Pages */}
         <Pagination
-          count={(handleSearch()?.length / 10).toFixed(0)}
+          count={Number((handleSearch()?.length / 10).toFixed(0))}
           onChange={(_, value) => {
             setPage(value);
             window.scroll(0, 450);

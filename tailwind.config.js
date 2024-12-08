@@ -15,6 +15,10 @@ export default {
       },
       colors: {
         gold: "#FFD700"
+      },
+      screens:{
+        'xs': '0px',
+        'mid': '900px'
       }
     },
   },

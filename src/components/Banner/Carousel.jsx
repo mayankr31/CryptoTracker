@@ -4,10 +4,8 @@ import { TrendingCoins } from "../../config/api";
 import axios from "axios";
 import AliceCarousel from "react-alice-carousel";
 import { Link } from "react-router-dom";
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+import {numberWithCommas} from '../../config/data';
+import { LinearProgress } from "@mui/material";
 
 export function Carousel(props) {
   const [trending, setTrending] = useState([]);
@@ -16,13 +14,14 @@ export function Carousel(props) {
   const fetchTrendingCoins = async () => {
     const { data } = await axios.get(TrendingCoins(currency));
 
-    console.log(data);
     setTrending(data);
   };
 
   useEffect(() => {
     fetchTrendingCoins();
   }, [currency]);
+
+  if(trending.length===0) return <LinearProgress style={{ backgroundColor: "gold" }} />;
 
   const items = trending.map((coin) => {
     let profit = coin?.price_change_percentage_24h >= 0;
